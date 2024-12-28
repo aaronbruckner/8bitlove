@@ -1,0 +1,23 @@
+---
+events:
+  - key: kittensOn2024-1-1
+    title: Kittens on Jan 1st
+    date: 2024-1-1
+    summary: |
+      This happened at the start of 2024.
+
+      We ate some food. It was cool. I did something memorable.
+
+      The end.
+  - key: penguinsOn2024-7-1
+    title: Another item in July
+    date: 2024-7-1
+    summary: |
+      Something happened in the middle of 2024. But my memory is so bad I forgot.
+  - key: sealsIn2025
+    title: Something in the next year
+    date: 2025-3-15
+    summary: |
+      Right now this is in the future but soon it won't be.
+
+      Here's to 2025.
