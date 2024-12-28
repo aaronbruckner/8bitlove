@@ -1,5 +1,4 @@
-* Create test data with images and text
-* Create basic title screen with simple ascii art
+* Create basic title screen with simple ascii art, Move to main menu page with key press
 * Create UI that collects AWS credentials and saves locally. Runs once on startup and collects data
     * Access Key
     * Secret key
@@ -10,3 +9,4 @@
 * Display and update timestamp whenever cache is updated from S3
 * View test data as tree
 * Implement "Guess which event" that displays picture and has user guess from a list of options
+
