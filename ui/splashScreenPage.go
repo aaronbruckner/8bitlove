@@ -1,6 +1,7 @@
 package ui
 
 import (
+	"github.com/gdamore/tcell/v2"
 	"github.com/rivo/tview"
 )
 
@@ -14,6 +15,13 @@ const TITLE = `
  ░▒▓██████▓▒░       ░▒▓███████▓▒░░▒▓█▓▒░  ░▒▓█▓▒░          ░▒▓████████▓▒░▒▓██████▓▒░   ░▒▓██▓▒░  ░▒▓████████▓▒░
 `
 
-func newSplashScreenPage() *tview.TextView {
-	return tview.NewTextView().SetText(TITLE).SetTextAlign(tview.AlignCenter)
+func newSplashScreenPage(onContinue func()) *tview.TextView {
+	var page = tview.NewTextView().SetText(TITLE).SetTextAlign(tview.AlignCenter)
+
+	page.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
+		onContinue()
+		return nil
+	})
+
+	return page
 }

@@ -1,7 +1,6 @@
 package ui
 
 import (
-	"github.com/gdamore/tcell/v2"
 	"github.com/rivo/tview"
 )
 
@@ -13,13 +12,13 @@ const (
 func StartApp() {
 
 	var pages = tview.NewPages()
-	pages.AddPage(PAGE_WELCOME, newSplashScreenPage(), true, false)
+
+	var onSplashScreenContinue = func() {
+		pages.SwitchToPage(PAGE_MAIN_MENU)
+	}
+	pages.AddPage(PAGE_WELCOME, newSplashScreenPage(onSplashScreenContinue), true, false)
 	pages.AddPage(PAGE_MAIN_MENU, newMainPage(), true, false)
 	pages.SwitchToPage(PAGE_WELCOME)
-	pages.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
-		pages.SwitchToPage(PAGE_MAIN_MENU)
-		return event
-	})
 	tview.NewApplication().SetRoot(pages, true).Run()
 
 }
