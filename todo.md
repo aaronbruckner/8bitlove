@@ -1,4 +1,3 @@
-* Create basic title screen with simple ascii art, Move to main menu page with key press
 * Create UI that collects AWS credentials and saves locally. Runs once on startup and collects data
     * Access Key
     * Secret key
