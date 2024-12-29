@@ -26,3 +26,5 @@ go.work.sum
 
 # Project Specific
 8bitlove
+.localAuthConfig.json
+.vscode/

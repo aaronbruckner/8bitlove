@@ -5,20 +5,40 @@ import (
 )
 
 const (
-	PAGE_WELCOME   string = "welcomePage"
-	PAGE_MAIN_MENU string = "mainMenuPage"
+	PAGE_WELCOME          string = "welcomePage"
+	PAGE_MAIN_MENU        string = "mainMenuPage"
+	PAGE_CONFIG_FORM_PAGE string = "configFormPage"
 )
 
 func StartApp() {
 
 	var pages = tview.NewPages()
+	var authConfig, authConfigErr = loadLocalAuthConfigIfPresent()
 
 	var onSplashScreenContinue = func() {
-		pages.SwitchToPage(PAGE_MAIN_MENU)
+		if authConfigErr != nil {
+			pages.SwitchToPage(PAGE_CONFIG_FORM_PAGE)
+		} else {
+			pages.SwitchToPage(PAGE_MAIN_MENU)
+		}
 	}
+
+	var onAuthConfigSubmit = func(c AuthConfig) {
+		authConfig = c
+		saveLocalAuthConfig(c)
+		pages.SwitchToPage(PAGE_MAIN_MENU)
+		if authConfig.Aws_access_key != "" {
+
+		}
+	}
+
 	pages.AddPage(PAGE_WELCOME, newSplashScreenPage(onSplashScreenContinue), true, false)
 	pages.AddPage(PAGE_MAIN_MENU, newMainPage(), true, false)
+	pages.AddPage(PAGE_CONFIG_FORM_PAGE, newConfigFormPage(onAuthConfigSubmit), true, false)
 	pages.SwitchToPage(PAGE_WELCOME)
-	tview.NewApplication().SetRoot(pages, true).Run()
+	err := tview.NewApplication().SetRoot(pages, true).EnableMouse(true).Run()
+	if err != nil {
+		panic(err)
+	}
 
 }

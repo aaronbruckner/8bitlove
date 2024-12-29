@@ -1,6 +1,3 @@
-* Create UI that collects AWS credentials and saves locally. Runs once on startup and collects data
-    * Access Key
-    * Secret key
 * Create basic cache that can reference local config & yaml
 * Push test data to S3
 * Pull data from S3 if missing, save locally
