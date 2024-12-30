@@ -15,24 +15,24 @@ var ErrLocalAuthConfigNotPresent = errors.New("ErrLocalAuthConfigNotPresent")
 
 const AUTH_CONFIG_FILE_NAME = ".localAuthConfig.json"
 
-func LoadLocalAuthConfigIfPresent() (AuthConfig, error) {
-	var config AuthConfig
+func LoadLocalAuthConfigIfPresent() *AuthConfig {
+	var config *AuthConfig = &AuthConfig{}
 
 	authBytes, err := os.ReadFile(AUTH_CONFIG_FILE_NAME)
 	if err != nil {
-		return config, ErrLocalAuthConfigNotPresent
+		return nil
 	}
 
-	err = json.Unmarshal(authBytes, &config)
+	err = json.Unmarshal(authBytes, config)
 
 	if err != nil {
-		return config, ErrLocalAuthConfigNotPresent
+		return nil
 	}
 
-	return config, nil
+	return config
 }
 
-func SaveLocalAuthConfig(config AuthConfig) {
+func SaveLocalAuthConfig(config *AuthConfig) {
 	jsonBytes, err := json.Marshal(config)
 	if err != nil {
 		panic(err)

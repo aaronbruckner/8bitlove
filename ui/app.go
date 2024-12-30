@@ -14,17 +14,17 @@ const (
 func StartApp() {
 
 	var pages = tview.NewPages()
-	var authConfig, authConfigErr = config.LoadLocalAuthConfigIfPresent()
+	var authConfig = config.LoadLocalAuthConfigIfPresent()
 
 	var onSplashScreenContinue = func() {
-		if authConfigErr != nil {
+		if authConfig == nil {
 			pages.SwitchToPage(PAGE_CONFIG_FORM_PAGE)
 		} else {
 			pages.SwitchToPage(PAGE_MAIN_MENU)
 		}
 	}
 
-	var onAuthConfigSubmit = func(c config.AuthConfig) {
+	var onAuthConfigSubmit = func(c *config.AuthConfig) {
 		authConfig = c
 		config.SaveLocalAuthConfig(c)
 		pages.SwitchToPage(PAGE_MAIN_MENU)
