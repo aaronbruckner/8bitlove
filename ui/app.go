@@ -1,6 +1,7 @@
 package ui
 
 import (
+	"github.com/aaronbruckner/8bitlove/config"
 	"github.com/rivo/tview"
 )
 
@@ -13,7 +14,7 @@ const (
 func StartApp() {
 
 	var pages = tview.NewPages()
-	var authConfig, authConfigErr = loadLocalAuthConfigIfPresent()
+	var authConfig, authConfigErr = config.LoadLocalAuthConfigIfPresent()
 
 	var onSplashScreenContinue = func() {
 		if authConfigErr != nil {
@@ -23,9 +24,9 @@ func StartApp() {
 		}
 	}
 
-	var onAuthConfigSubmit = func(c AuthConfig) {
+	var onAuthConfigSubmit = func(c config.AuthConfig) {
 		authConfig = c
-		saveLocalAuthConfig(c)
+		config.SaveLocalAuthConfig(c)
 		pages.SwitchToPage(PAGE_MAIN_MENU)
 		if authConfig.Aws_access_key != "" {
 

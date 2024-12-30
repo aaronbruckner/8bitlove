@@ -1,4 +1,4 @@
-package ui
+package config
 
 import (
 	"encoding/json"
@@ -15,7 +15,7 @@ var ErrLocalAuthConfigNotPresent = errors.New("ErrLocalAuthConfigNotPresent")
 
 const AUTH_CONFIG_FILE_NAME = ".localAuthConfig.json"
 
-func loadLocalAuthConfigIfPresent() (AuthConfig, error) {
+func LoadLocalAuthConfigIfPresent() (AuthConfig, error) {
 	var config AuthConfig
 
 	authBytes, err := os.ReadFile(AUTH_CONFIG_FILE_NAME)
@@ -32,7 +32,7 @@ func loadLocalAuthConfigIfPresent() (AuthConfig, error) {
 	return config, nil
 }
 
-func saveLocalAuthConfig(config AuthConfig) {
+func SaveLocalAuthConfig(config AuthConfig) {
 	jsonBytes, err := json.Marshal(config)
 	if err != nil {
 		panic(err)
